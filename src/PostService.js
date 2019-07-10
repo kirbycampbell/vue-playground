@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = "http://localhost:5000/api/posts";
+const url = "https://sleepy-badlands-25452.herokuapp.com/api/posts/";
 
 class PostService {
   static getPosts() {

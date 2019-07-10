@@ -17,6 +17,7 @@
           v-bind:index="index"
           v-bind:key="post._id"
         >
+          <p class="x-out" v-on:click="deletePost(post._id)">X</p>
           {{ `${post.createdAt.getDate()}/${post.createdAt.getMonth()}/${post.createdAt.getFullYear()}`}}
           <p class="text">{{ post.text}}</p>
         </div>
@@ -46,6 +47,10 @@ export default {
   methods: {
     async createPost() {
       await PostService.insertPost(this.text);
+      this.posts = await PostService.getPosts();
+    },
+    async deletePost(id) {
+      await PostService.deletePost(id);
       this.posts = await PostService.getPosts();
     }
   }
@@ -79,8 +84,9 @@ p.error {
 
 div.post {
   position: relative;
-  border: 1px solid #5bd658;
-  background-color: #bcffb8;
+  border: 2px dotted #d6589775;
+  background-color: #b8fff69d;
+  border-radius: 20px;
   padding: 10px 10px 30px 10px;
   padding-top: 20px;
   margin: 10px;
@@ -100,5 +106,17 @@ p.text {
   font-size: 22px;
   font-weight: 700;
   margin-bottom: 0;
+}
+
+.x-out {
+  display: flex;
+  position: absolute;
+  right: 3%;
+  top: 5%;
+  border-radius: 40px;
+  padding: 3px 6px;
+  font-weight: bold;
+  background: rgba(128, 128, 128, 0.37);
+  cursor: pointer;
 }
 </style>

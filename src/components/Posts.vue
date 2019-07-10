@@ -27,37 +27,36 @@
 </template>
 
 <script>
-import PostService from "../PostService";
+//import PostService from "../PostService";
+import store from "@/store";
+window.console.log(store);
 export default {
   name: "Posts",
+  computed: {
+    posts() {
+      return store.getters.allPosts;
+    }
+  },
   data() {
     return {
-      posts: [],
       error: "",
       text: ""
     };
   },
-  async created() {
-    try {
-      this.posts = await PostService.getPosts();
-    } catch (err) {
-      this.error = err.message;
-    }
+  created() {
+    store.dispatch("fetchPosts");
   },
   methods: {
-    async createPost() {
-      await PostService.insertPost(this.text);
-      this.posts = await PostService.getPosts();
+    createPost() {
+      store.dispatch("createPost", this.text);
     },
     async deletePost(id) {
-      await PostService.deletePost(id);
-      this.posts = await PostService.getPosts();
+      store.dispatch("deletePost", id);
     }
   }
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 div.outerMost {
   display: flex;

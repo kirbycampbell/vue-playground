@@ -2,6 +2,8 @@ import axios from "axios";
 
 const url = "https://sleepy-badlands-25452.herokuapp.com/api/posts/";
 
+// const url = "http://localhost:5000/api/posts/";
+
 class PostService {
   static getPosts() {
     return new Promise(async (resolve, reject) => {

@@ -23,8 +23,8 @@ export default new Vuex.Store({
       let retPosts = await PostService.getPosts();
       commit("setPosts", retPosts);
     },
-    async createPost({ commit }, text) {
-      await PostService.insertPost(text);
+    async createPost({ commit }, params) {
+      await PostService.insertPost(params);
       let retPosts = await PostService.getPosts();
       commit("setPosts", retPosts);
     },

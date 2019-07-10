@@ -1,13 +1,24 @@
+
 <template>
   <div class="outerMost">
     <div class="container">
       <h1>Latest Posts</h1>
-      <div class="create-post">
-        <label for="create-post">Say Something....</label>
-        <input type="text" id="create-post" v-model="text" placeholder="Create a post" />
-        <button v-on:click="createPost">Post</button>
+      <div v-if="form">
+        <div class="create-post">
+          <p class="form-x" v-on:click="handleForm">X</p>
+
+          <label for="create-post">Create Post</label>
+          <input type="text" id="create-post" v-model="title" placeholder="Enter Title" />
+
+          <input type="text" id="create-post" v-model="text" placeholder="Create a post" />
+          <input type="text" id="create-post" v-model="image" placeholder="Paste img Src" />
+
+          <button class="post-btn" v-on:click="createPost">Post</button>
+        </div>
       </div>
-      <hr />
+      <div v-else>
+        <button class="post-btn" v-on:click="handleForm">Create New Post</button>
+      </div>
       <p class="error" v-if="error">{{ error }}</p>
       <div class="posts-container">
         <div
@@ -17,9 +28,11 @@
           v-bind:index="index"
           v-bind:key="post._id"
         >
+          {{ `${post.createdAt.getMonth()}/${post.createdAt.getDate()}/${post.createdAt.getFullYear()}`}}
           <p class="x-out" v-on:click="deletePost(post._id)">X</p>
-          {{ `${post.createdAt.getDate()}/${post.createdAt.getMonth()}/${post.createdAt.getFullYear()}`}}
+          <h1>{{post.title}}</h1>
           <p class="text">{{ post.text}}</p>
+          <img class="imgg" v-bind:src="post.image" v-bind:alt="post.image" />
         </div>
       </div>
     </div>
@@ -34,13 +47,16 @@ export default {
   name: "Posts",
   computed: {
     posts() {
-      return store.getters.allPosts;
+      return store.getters.allPosts.reverse();
     }
   },
   data() {
     return {
       error: "",
-      text: ""
+      text: "",
+      title: "",
+      image: "",
+      form: false
     };
   },
   created() {
@@ -48,10 +64,15 @@ export default {
   },
   methods: {
     createPost() {
-      store.dispatch("createPost", this.text);
+      let params = { text: this.text, title: this.title, image: this.image };
+      store.dispatch("createPost", params);
+      this.form = false;
     },
     async deletePost(id) {
       store.dispatch("deletePost", id);
+    },
+    handleForm() {
+      this.form = !this.form;
     }
   }
 };
@@ -74,6 +95,41 @@ div.container {
   margin: 0 auto;
 }
 
+.create-post {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 2%;
+  border: 1px solid rgba(155, 24, 90, 0.164);
+  padding: 3%;
+  background: rgba(143, 170, 201, 0.418);
+  border-radius: 16px;
+  box-shadow: 0px 0px 6px 0.4px rgba(0, 0, 255, 0.5);
+}
+#create-post {
+  margin: 1%;
+  width: 80%;
+  text-align: center;
+  border: none;
+  height: 30px;
+  border-radius: 5px;
+}
+
+.post-btn {
+  margin-top: 20px;
+  width: 30%;
+  height: 40px;
+  border: none;
+  background: rgba(126, 126, 218, 0.74);
+  color: white;
+  font-size: 25px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 50px;
+}
+
 p.error {
   border: 1px solid #ff5b5f;
   background-color: #ffc5c1;
@@ -83,12 +139,28 @@ p.error {
 
 div.post {
   position: relative;
-  border: 2px dotted #d6589775;
-  background-color: #b8fff69d;
+  border: 2px solid #d6589775;
+  background-color: #b8fff95d;
+  z-index: -100;
   border-radius: 20px;
-  padding: 10px 10px 30px 10px;
-  padding-top: 20px;
-  margin: 10px;
+  padding: 6px;
+  padding-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 80%;
+  margin: auto;
+  margin-top: 10px;
+}
+.imgg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: -10;
+  min-height: 80px;
+  max-height: 350px;
+  max-width: 60%;
 }
 
 div.created-at {
@@ -102,9 +174,20 @@ div.created-at {
 }
 
 p.text {
-  font-size: 22px;
-  font-weight: 700;
+  font-size: 16px;
   margin-bottom: 0;
+}
+
+.form-x {
+  display: flex;
+  position: absolute;
+  right: 3%;
+  top: 5%;
+  border-radius: 40px;
+  padding: 3px 6px;
+  font-weight: bold;
+  background: rgba(128, 128, 128, 0.37);
+  cursor: pointer;
 }
 
 .x-out {

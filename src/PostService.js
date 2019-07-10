@@ -22,9 +22,11 @@ class PostService {
     });
   }
 
-  static insertPost(text) {
+  static insertPost(text, title, image) {
     return axios.post(url, {
-      text
+      text: text,
+      title: title,
+      image: image
     });
   }
 

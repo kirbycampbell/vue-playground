@@ -20,7 +20,7 @@
         <button class="post-btn" v-on:click="handleForm">Create New Post</button>
       </div>
       <p class="error" v-if="error">{{ error }}</p>
-      <div class="posts-container">
+      <div>
         <div
           class="post"
           v-for="(post, index) in posts"
@@ -130,6 +130,10 @@ div.container {
   border-radius: 50px;
 }
 
+.post-btn:hover {
+  background: rgba(98, 98, 184, 0.74);
+}
+
 p.error {
   border: 1px solid #ff5b5f;
   background-color: #ffc5c1;
@@ -141,7 +145,7 @@ div.post {
   position: relative;
   border: 2px solid #d6589775;
   background-color: #b8fff95d;
-  z-index: -100;
+  z-index: 0;
   border-radius: 20px;
   padding: 6px;
   padding-top: 10px;
@@ -200,5 +204,10 @@ p.text {
   font-weight: bold;
   background: rgba(128, 128, 128, 0.37);
   cursor: pointer;
+  z-index: 120;
+}
+
+.x-out:hover {
+  background: rgba(75, 59, 59, 0.37);
 }
 </style>

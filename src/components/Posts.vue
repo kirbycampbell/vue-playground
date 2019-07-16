@@ -33,6 +33,9 @@
           <h1>{{post.title}}</h1>
           <p class="text">{{ post.text}}</p>
           <img class="imgg" v-bind:src="post.image" v-bind:alt="post.image" />
+          <div class="like-bar">
+            <i class="far fa-heart heart-icon"></i>
+          </div>
         </div>
       </div>
     </div>
@@ -107,6 +110,22 @@ export default {
     border-radius: 50px;
   }
 }
+div.like-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  width: 100%;
+  margin-top: 5px;
+}
+.heart-icon {
+  font-size: 22px;
+  cursor: pointer;
+}
+.heart-icon:hover {
+  color: rgb(231, 88, 83);
+  border-radius: 100px;
+}
 div.outerMost {
   display: flex;
   width: 100%;
@@ -118,7 +137,6 @@ div.outerMost {
 }
 div.container {
   width: 100%;
-
   min-width: 200px;
   margin: 0 auto;
 }

@@ -9,6 +9,25 @@
       <router-link to="/about">About</router-link>-->
     </div>
     <router-view />
+    <div class="footer">
+      <div class="inner-footer">
+        Created By Kirby Campbell
+        <br />
+        <div class="small-text">
+          View
+          <a
+            href="https://github.com/kirbycampbell/vue-playground"
+            target="_blank"
+            rel="noopener noreferrer"
+          >Front End</a> and
+          <a
+            href="https://github.com/kirbycampbell/backend-express/blob/master/server/routes/api/posts.js"
+            target="_blank"
+            rel="noopener noreferrer"
+          >Back End</a> on Github
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -51,6 +70,24 @@
 .top-img {
   width: 100%;
   z-index: 0;
+}
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+  background: rgb(28, 32, 49);
+  margin-top: 30px;
+}
+.inner-footer {
+  color: white;
+}
+.small-text {
+  margin-top: 10px;
+  font-size: 12px;
+}
+a {
+  color: rgb(171, 171, 233);
 }
 @media all and (max-width: 750px) {
   .img-outer {

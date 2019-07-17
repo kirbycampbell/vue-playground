@@ -2,6 +2,7 @@ import axios from "axios";
 
 const url = "https://sleepy-badlands-25452.herokuapp.com/api/posts/";
 
+// url for localhost
 // const url = "http://localhost:5000/api/posts/";
 
 class PostService {

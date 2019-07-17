@@ -5,8 +5,6 @@
         <img class="top-img" alt="Vue logo" src="https://i.imgur.com/loopcea.jpg" />
         <div class="site-title">StatUs.io</div>
       </div>
-      <!-- <router-link to="/">Home</router-link>|
-      <router-link to="/about">About</router-link>-->
     </div>
     <router-view />
     <div class="footer">

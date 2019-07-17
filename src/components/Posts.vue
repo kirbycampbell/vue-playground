@@ -43,7 +43,6 @@
 </template>
 
 <script>
-//import PostService from "../PostService";
 import store from "@/store";
 window.console.log(store);
 export default {
